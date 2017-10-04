@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/okhttp3-downloadprogress-interceptor.iml" filepath="$PROJECT_DIR$/.idea/modules/okhttp3-downloadprogress-interceptor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/okhttp3-downloadprogress-interceptor_main.iml" filepath="$PROJECT_DIR$/.idea/modules/okhttp3-downloadprogress-interceptor_main.iml" group="okhttp3-downloadprogress-interceptor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/okhttp3-downloadprogress-interceptor_test.iml" filepath="$PROJECT_DIR$/.idea/modules/okhttp3-downloadprogress-interceptor_test.iml" group="okhttp3-downloadprogress-interceptor" />
+    </modules>
+  </component>
+</project>
