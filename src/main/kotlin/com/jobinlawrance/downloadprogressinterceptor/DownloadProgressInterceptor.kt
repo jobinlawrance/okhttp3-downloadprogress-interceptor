@@ -11,8 +11,7 @@ import java.io.IOException
 class DownloadProgressInterceptor(val progressEventBus: ProgressEventBus) : Interceptor {
 
     companion object {
-        @JvmField
-        val DOWNLOAD_IDENTIFIER_HEADER = "download-identifier"
+        const val DOWNLOAD_IDENTIFIER_HEADER = "download-identifier"
     }
 
     @Throws(IOException::class)
