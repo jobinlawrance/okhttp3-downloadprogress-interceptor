@@ -10,10 +10,6 @@ import java.io.IOException
  */
 class DownloadProgressInterceptor(val progressEventBus: ProgressEventBus) : Interceptor {
 
-    companion object {
-        const val DOWNLOAD_IDENTIFIER_HEADER = "download-identifier"
-    }
-
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalResponse = chain.proceed(chain.request())
