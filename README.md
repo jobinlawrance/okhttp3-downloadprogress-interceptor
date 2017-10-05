@@ -1,4 +1,4 @@
-Download Progress Interceptor
+Downloadprogress Interceptor
 ===================
 
 An [OkHttp interceptor][1] which monitors download progress of HTTP response data.
@@ -6,7 +6,7 @@ An [OkHttp interceptor][1] which monitors download progress of HTTP response dat
 [![](https://jitpack.io/v/jobinlawrance/okhttp3-downloadprogress-interceptor.svg)](https://jitpack.io/#jobinlawrance/okhttp3-downloadprogress-interceptor)
 
 ## Download  
-downloadprogress-interceptor is available on [Jitpack][2]  
+Downloadprogress Interceptor is available on [Jitpack][2]  
 add the JitPack repository in your project build.gradle (in top level dir):
 ```gradle
 repositories {
@@ -57,7 +57,12 @@ interface PhotoService {
 }
 ```  
 
-### Downloading and checking progress
+### Downloading and checking progress  
+To receive download progress updates, we subsribe to `ProgressEventBus`. Whenever a download is started by retrofit all the subscibers receives a `ProgressEvent` which has the `progress`(in percent) and `downloadIdentifier` data among others.  
+Since `ProgressEventBus` monitors all the download requests with the custom header we set above, we check the `ProgressEvent.dowloadIdentfier` to filter out the `ProgressEvent` we are interested in.  
+Here's an example - 
+###### kotlin
+
 ```kotlin
 // Inject retrofit and progressEventBus
 
@@ -67,7 +72,7 @@ interface PhotoService {
 val imageUrl = "https://upload.wikimedia.org/wikipedia/commons/2/24/Junonia_orithya-Thekkady-2016-12-03-001.jpg"
 val imageIdentifier = "my-wiki-image"
 
-val disposable =                                
+val disposable =                                  // handle unsubscription   
                 progressEventBus.observable()
                         .subscribe(
                                 {
@@ -77,10 +82,7 @@ val disposable =
                                     }
                                 },
                                 {
-                                    Timber.e(it, "ProgressEvent Error")
-                                },
-                                {
-                                    Timber.d("ProgressEvent Complete")
+                                    Log.d("ProgressEvent Error",it)
                                 }
                         )
 
@@ -105,7 +107,28 @@ retrofit.create(PhotoService::class.java)
                         }
                 )
     
-```
+```  
+
+## Credits
+1. [https://blog.playmoweb.com/view-download-progress-on-android-using-retrofit2-and-okhttp3-83ed704cb968](https://blog.playmoweb.com/view-download-progress-on-android-using-retrofit2-and-okhttp3-83ed704cb968)  
+2. [https://github.com/square/okhttp/blob/aed222454743ebe5724d6ad438fafed37956521e/samples/guide/src/main/java/okhttp3/recipes/Progress.java](https://github.com/square/okhttp/blob/aed222454743ebe5724d6ad438fafed37956521e/samples/guide/src/main/java/okhttp3/recipes/Progress.java)  
+
+## License
+
+    Copyright 2017-2018 Jobin Lawrance
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 
 
 
