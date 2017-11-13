@@ -27,9 +27,10 @@ dependencies {
 The progress monitoring won't work if the reponse doesn't have a `content-length` in it's header.  
 
 ### Creating the interceptor  
-###### kotlin  
+ 
 We use a simple event bus `ProgressEventBus` to track the progress of all the download requests.  
 Since `OkHttpClient` and `Retrofit` is instantiated as application wise singletons, the same should be done with `ProgressEventBus` and it should be injected to the classes that requires the progress monitoring.
+###### kotlin 
 ```kotlin
 val progressEventBus: ProgressEventBus = ProgressEventBus()
 val downloadInterceptor: DownloadProgressInterceptor = DownloadProgressInterceptor(progressEventBus)
