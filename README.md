@@ -75,38 +75,31 @@ val imageIdentifier = "my-wiki-image"
 
 val disposable =                                  // handle unsubscription   
                 progressEventBus.observable()
-                        .subscribe(
-                                {
-                                    if(it.downloadIdentifier == imageIdentifier) {
-                                      // Display the progress here
-                                      Log.d("Download Progress - ${it.progress}")
-                                    }
-                                },
-                                {
-                                    Log.d("ProgressEvent Error",it)
-                                }
-                        )
+                        .subscribe({
+                                        if(it.downloadIdentifier == imageIdentifier) {
+                                          // Display the progress here
+                                          Log.d("Download Progress - ${it.progress}")
+                                        }
+                                   },{
+                                        Log.d("ProgressEvent Error",it)
+                                   })
 
 retrofit.create(PhotoService::class.java)
                 .downloadPhoto(imageUrl, imageIdentifier)
-                .subscribe(
-                        {   
+                .subscribe({   
                             // onNext(resonseBody)
                             // Download start, 
                             // code to save the responseBody to file in storage
                             
-                        },
-                        {   
-                            // onError()
-                            // Error in dowloading
-                        },
-                        {
-                           // Download complete
-                           if (!disposable.isDisposed) {
-                                disposable.dispose()
-                            }
-                        }
-                )
+                            },{   
+                                // onError()
+                                // Error in dowloading
+                            },{
+                               // Download complete
+                               if (!disposable.isDisposed) {
+                                    disposable.dispose()
+                                }
+                            })
     
 ```  
 
